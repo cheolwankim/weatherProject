@@ -1,0 +1,51 @@
+.weatherPageImage {
+  background-image: url(/public/img/wat4.png);
+  /* 0으로갈수록 투명 */
+
+  position: relative;
+  background-repeat: no-repeat;
+  /* background-position: top center; */
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100rem;
+}
+
+.weatherContent {
+  margin-left: 2rem;
+  margin-top: 2rem;
+  margin-right: 1rem;
+  background-color: rgba(255, 255, 255, 0.4);
+  /* opacity: 0; */
+  border-radius: 15px;
+}
+
+.todayContent {
+  color: white;
+  font-weight: 1000;
+  /* display: flex; */
+  font-size: 2rem;
+  background-color: rgba(21, 53, 141, 0.7);
+  border-radius: 15px;
+}
+
+.myButton {
+  margin: 5px;
+}
+
+.rainyType {
+  font-size: 7rem;
+  color: rgb(255, 255, 255);
+}
+
+.head {
+  color: rgb(255, 245, 245);
+  font-weight: 1000;
+  font-size: 2rem;
+  padding-left: 5px;
+}
+
+.tommorow {
+  /* background-color: aliceblue; */
+  height: 100%;
+  color: white;
+}
