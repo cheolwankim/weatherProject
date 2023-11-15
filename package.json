@@ -33,7 +33,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"    
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +41,7 @@
       "react-app/jest"
     ]
   },
+  "homepage": "https://cheolwanweather.netlify.app/",
   "browserslist": {
     "production": [
       ">0.2%",
