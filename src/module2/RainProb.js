@@ -7,8 +7,8 @@ const RainProb = ({ data, value }) => {
   //newHour 현재-1 시각
   let yestHour = new Date();
   yestHour.setHours(yestHour.getHours() - 1);
-  let yestHourValue = yestHour.getHours(); //하루전 시간값
-  let newHour = 0 + (yestHourValue * 100).toString(); //한시간전시간값
+  // let yestHourValue = yestHour.getHours(); //하루전 시간값
+  // let newHour = 0 + (yestHourValue * 100).toString(); //한시간전시간값
 
   const array = data.filter(
     (n) =>

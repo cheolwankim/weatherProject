@@ -24,8 +24,8 @@ const Weather = () => {
 
   const [data, setData] = useState("");
   const [dataTwo, setDataTwo] = useState("");
-  const [word, setWord] = useState("");
-  const [sec, setSec] = useState(""); //원하는 시간
+  // const [word, setWord] = useState("");
+  // const [sec, setSec] = useState(""); //원하는 시간
 
   //nx ny 설정 (기본값: 서울)
   const [nx, setNx] = useState("60");
@@ -61,7 +61,7 @@ const Weather = () => {
   yestHour.setHours(yestHour.getHours() - 1);
   let yestHourValue = yestHour.getHours(); //하루전 시간값
 
-  let hour = (today.getHours() * 100).toString(); //지금시간값
+  // let hour = (today.getHours() * 100).toString(); //지금시간값
   let newHour = 0 + (yestHourValue * 100).toString(); //한시간전시간값
 
   let todayValue = year * 10000 + month * 100 + date; //오늘 날짜값
@@ -92,7 +92,7 @@ const Weather = () => {
       }
     };
     fetchData();
-  }, [nx, ny]);
+  }, [API_KEY, yesterdayValue,newHour, todayValue, nx, ny]);
 
   const onClickEventTwo = (x, y) => {
     setNx(x);
