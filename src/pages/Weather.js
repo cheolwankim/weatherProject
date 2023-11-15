@@ -20,8 +20,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "react-bootstrap";
 
 const Weather = () => {
-  // const API_KEY = process.env.REACT_APP_API_KEY_MY;
-  const API_KEY = "TtRcDblxbFIfeiYINbM5hz7gFoQ%2FxFL56zcQBY%2BZ%2BzzsD2FdyUW4rKtWsbNB9q2sbMK0TxwSo8JiHu808leWOg%3D%3D"
+  const API_KEY = process.env.REACT_APP_API_KEY_MY;
+  // const API_KEY = "TtRcDblxbFIfeiYINbM5hz7gFoQ%2FxFL56zcQBY%2BZ%2BzzsD2FdyUW4rKtWsbNB9q2sbMK0TxwSo8JiHu808leWOg%3D%3D"
 
   const [data, setData] = useState("");
   const [dataTwo, setDataTwo] = useState("");
