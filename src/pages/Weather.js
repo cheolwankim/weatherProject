@@ -21,7 +21,6 @@ import { Button } from "react-bootstrap";
 
 const Weather = () => {
   const API_KEY = process.env.REACT_APP_API_KEY_MY;
-  
 
   const [data, setData] = useState("");
   const [dataTwo, setDataTwo] = useState("");
@@ -43,18 +42,24 @@ const Weather = () => {
   ];
 
   const today = new Date();
-  const year = today.getFullYear(); // 년도
-  const month = today.getMonth() + 1; // 월
-  const date = today.getDate(); // 날짜
 
-  //하루전 몇일인지 구하기
-  let yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-  let yesterDate = yesterday.getDate();
+  //하루전
+  let yesterdayValue = new Date(today.setDate(today.getDate() - 1));
+  let yesterdayYear = yesterdayValue.getFullYear();
+  let yesterdayMonth = ("0" + (1 + yesterdayValue.getMonth())).slice(-2);
+  let yesterdayDate = ("0" + yesterdayValue.getDate()).slice(-2);
 
-  let tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  let tomorrowDate = tomorrow.getDate();
+  //오늘
+  let todayDateValue = new Date(today.setDate(today.getDate() + 1));
+  let todayYear = todayDateValue.getFullYear();
+  let todayMonth = ("0" + (1 + todayDateValue.getMonth())).slice(-2);
+  let todayDate = ("0" + todayDateValue.getDate()).slice(-2);
+
+  //내일날짜값
+  let tomorrowValue = new Date(today.setDate(today.getDate() + 1)); //하루후
+  let tomorrowYear = tomorrowValue.getFullYear();
+  let tomorrowYearMonth = ("0" + (1 + tomorrowValue.getMonth())).slice(-2);
+  let tomorrowDate = ("0" + tomorrowValue.getDate()).slice(-2);
 
   //한시간 전 시간 값구하기
   //이렇게하는이유가 나중이 31 +1 이나 01-1 같은 숫자가왔을때 오류 방지하기 위해서
@@ -65,9 +70,10 @@ const Weather = () => {
   // let hour = (today.getHours() * 100).toString(); //지금시간값
   let newHour = 0 + (yestHourValue * 100).toString(); //한시간전시간값
 
-  let todayValue = year * 10000 + month * 100 + date; //오늘 날짜값
-  let yesterdayValue = year * 10000 + month * 100 + yesterDate; //하루 전 날짜값
-  let tomorrowDateValue = year * 10000 + month * 100 + tomorrowDate; //하루 후 날짜값
+  let todayValue = todayYear + todayMonth + todayDate; //오늘 날짜값
+  let yesterdayDateValue = yesterdayYear + yesterdayMonth + yesterdayDate; //하루 전 날짜값
+  let tomorrowDateValue = tomorrowYear + tomorrowYearMonth + tomorrowDate;
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,16 +82,18 @@ const Weather = () => {
           //현재기온
           //초단기실황
           //기본적으로 한시간전값가져와서 보여주게 설정함(현재값못가져올것 대비해서)
+          //todayValue(오늘날짜값)
           `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=${API_KEY}&numOfRows=10&pageNo=1&base_date=${todayValue}&base_time=${newHour}&nx=${nx}&ny=${ny}&dataType=json`
         );
         const responseTwo = await axios.get(
           //단기예보
           //하루전 날짜+ basetime : 0200 ,
-          //fcstTime 0200 + fcstDate yesterdayvalue +1(Today) +1(Tomorrow)
+          //fcstTime 0200 + fcstDate yesterdayDateValue +1(Today) +1(Tomorrow)
           //내일값 보여주기 하는중
-
-          `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${API_KEY}&numOfRows=1000&pageNo=1&base_date=${yesterdayValue}&base_time=0200&nx=${nx}&ny=${ny}&dataType=json`
+          //yesterdayDateValue(하루전날짜값)
+          `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${API_KEY}&numOfRows=1000&pageNo=1&base_date=${yesterdayDateValue}&base_time=0200&nx=${nx}&ny=${ny}&dataType=json`
         );
+
         setData(response.data.response.body.items.item);
         setDataTwo(responseTwo.data.response.body.items.item);
       } catch (e) {
@@ -93,7 +101,7 @@ const Weather = () => {
       }
     };
     fetchData();
-  }, [API_KEY, yesterdayValue,newHour, todayValue, nx, ny]);
+  }, [API_KEY, yesterdayDateValue, newHour, todayValue, nx, ny]);
 
   const onClickEventTwo = (x, y) => {
     setNx(x);
@@ -153,6 +161,7 @@ const Weather = () => {
               </div>
               <div className="myChart">
                 {/* 차트 */}
+                {/* 오늘날짜값 */}
                 <TempChart today={todayValue} data={dataTwo} />
               </div>
             </div>
