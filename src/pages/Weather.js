@@ -1,5 +1,3 @@
-// `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=${API_KEY}&numOfRows=10&pageNo=1&base_date=20231109&base_time=0200&nx=60&ny=127&dataType=json`
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "../css/Weather.css";
@@ -24,8 +22,6 @@ const Weather = () => {
 
   const [data, setData] = useState("");
   const [dataTwo, setDataTwo] = useState("");
-  // const [word, setWord] = useState("");
-  // const [sec, setSec] = useState(""); //원하는 시간
 
   //nx ny 설정 (기본값: 서울)
   const [nx, setNx] = useState("60");
@@ -43,7 +39,7 @@ const Weather = () => {
 
   const today = new Date();
 
-  //하루전
+  //하루전 날짜값
   let yesterdayValue = new Date(today.setDate(today.getDate() - 1));
   let yesterdayYear = yesterdayValue.getFullYear();
   let yesterdayMonth = ("0" + (1 + yesterdayValue.getMonth())).slice(-2);
@@ -55,7 +51,7 @@ const Weather = () => {
   let todayMonth = ("0" + (1 + todayDateValue.getMonth())).slice(-2);
   let todayDate = ("0" + todayDateValue.getDate()).slice(-2);
 
-  //내일날짜값
+  //내일
   let tomorrowValue = new Date(today.setDate(today.getDate() + 1)); //하루후
   let tomorrowYear = tomorrowValue.getFullYear();
   let tomorrowYearMonth = ("0" + (1 + tomorrowValue.getMonth())).slice(-2);
@@ -65,15 +61,12 @@ const Weather = () => {
   //이렇게하는이유가 나중이 31 +1 이나 01-1 같은 숫자가왔을때 오류 방지하기 위해서
   let yestHour = new Date();
   yestHour.setHours(yestHour.getHours() - 1);
-  let yestHourValue = yestHour.getHours(); //하루전 시간값
+  let yestHourValue = ("0" + yestHour.getHours() + "00").slice(-4); //하루전 시간값
+  let newHour = yestHourValue.toString();
 
-  // let hour = (today.getHours() * 100).toString(); //지금시간값
-  let newHour = 0 + (yestHourValue * 100).toString(); //한시간전시간값
-
-  let todayValue = todayYear + todayMonth + todayDate; //오늘 날짜값
-  let yesterdayDateValue = yesterdayYear + yesterdayMonth + yesterdayDate; //하루 전 날짜값
-  let tomorrowDateValue = tomorrowYear + tomorrowYearMonth + tomorrowDate;
-
+  let todayValue = todayYear + todayMonth + todayDate; //오늘 날짜값 (6자리)
+  let yesterdayDateValue = yesterdayYear + yesterdayMonth + yesterdayDate; //하루 전 날짜값(6자리)
+  let tomorrowDateValue = tomorrowYear + tomorrowYearMonth + tomorrowDate; ///어제 날짜값 (6자리)
 
   useEffect(() => {
     const fetchData = async () => {
