@@ -9,13 +9,8 @@ import Temperature from "../module/Temperature";
 import RainProb from "../module2/RainProb";
 import TempChart from "../module2/TempChart";
 import TomTemp from "../module2/TomTemp";
-
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 
 const Weather = () => {
   const API_KEY = process.env.REACT_APP_API_KEY_MY;
@@ -103,81 +98,69 @@ const Weather = () => {
 
   return (
     <div className="weatherPageImage">
-      <div className="head">MY WEATHER</div>
       <div className="weatherContent">
         <div>
           {data ? (
-            <div>
-              <div className="todayContent">
-                <Container>
-                  <Row>
-                    <Col xs={6} md={2}>
-                      <div className="rainyType">
-                        <RainType data={data} />
-                      </div>
-                    </Col>
-                    <Col xs={6} md={7}>
-                      <div className="temp">
-                        <Temperature data={data} />
-                      </div>
-                      <div className="humnid">
-                        <Humidity data={data} />
-                      </div>
-                      <div className="rainAmmount">
-                        <Rain data={data} />
-                      </div>
-                      <div className="wind">
-                        <Wind data={data} />
-                      </div>
-                    </Col>
-                    <Col xs={6} md={3}>
-                      {/*내일기온*/}
-                      <div className="tommorow">
-                        NEXTDAY
-                        <div className="tomTemp">
-                          <TomTemp
-                            tomorrow={tomorrowDateValue}
-                            data={dataTwo}
-                          />
-                          {/* 강수확률 */}
-                          <div className="tomRain">
-                            <RainProb
-                              value={tomorrowDateValue}
-                              data={dataTwo}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </Col>
-                  </Row>
-                </Container>
+            <div className="all_content">
+              {/*내일기온*/}
+              <div className="fourth_content">
+                <div className="tomTemp">
+                  <div className="tom_text">다음날</div>
+                  <TomTemp tomorrow={tomorrowDateValue} data={dataTwo} />
+                  {/* 강수확률 */}
+                  <div className="tomRain">
+                    <RainProb value={tomorrowDateValue} data={dataTwo} />
+                  </div>
+                </div>
               </div>
-              <div className="myChart">
-                {/* 차트 */}
-                {/* 오늘날짜값 */}
-                <TempChart today={todayValue} data={dataTwo} />
+              <div className="first_second_content">
+                <div className="first_content">
+                  <div className="rain_main">
+                    <div className="rainyType">
+                      <RainType data={data} />
+                    </div>
+                    <div className="temp">
+                      <Temperature data={data} />
+                    </div>
+                  </div>
+                  <div className="rain_else">
+                    <div className="humnid">
+                      <Humidity data={data} />
+                    </div>
+                    <div className="rainAmmount">
+                      <Rain data={data} />
+                    </div>
+                    <div className="wind">
+                      <Wind data={data} />
+                    </div>
+                  </div>
+                </div>
+                <div className="second_content">
+                  <div className="myChart">
+                    {/* 차트 */}
+                    {/* 오늘날짜값 */}
+                    <TempChart today={todayValue} data={dataTwo} />
+                  </div>
+                  <div className="button_content">
+                    {/* 서울 부산 등 지역 버튼 */}
+                    {info.map((n) => {
+                      return (
+                        <button
+                          className="myButton"
+                          key={n.id}
+                          onClick={() => onClickEventTwo(n.nx, n.ny)}
+                        >
+                          {n.id}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
           ) : (
-            <div>NOW LOADING</div>
+            <div className="loading">WeatherPage is onLoading . . . </div>
           )}
-          <div>
-            <div>
-              {/* 서울 부산 등 지역 버튼 */}
-              {info.map((n) => {
-                return (
-                  <Button
-                    variant="danger"
-                    className="myButton"
-                    key={n.id}
-                    onClick={() => onClickEventTwo(n.nx, n.ny)}
-                  >
-                    {n.id}
-                  </Button>
-                );
-              })}
-            </div>
-          </div>
         </div>
       </div>
     </div>

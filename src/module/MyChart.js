@@ -31,8 +31,8 @@ const MyChart = ({ myData }) => {
         position: "top",
       },
       title: {
-        display: true,
-        text: "오늘의 기온",
+        // display: true,
+        // text: "오늘의 기온",
       },
     },
   };
@@ -46,18 +46,15 @@ const MyChart = ({ myData }) => {
         label: "℃",
         data: myData.map((n) => n.fcstValue), //y축
         fontColor: "red",
-        borderColor: "rgb(125, 125, 255)",
-        backgroundColor: "rgba(0, 55, 55, 0.5)",
+        borderColor: "white",
+        backgroundColor: "black",
       },
     ],
   };
 
-
   return (
     <div>
-      
-        <Line options={options} data={data} />
-      
+      <Line options={options} data={data} />
     </div>
   );
 };

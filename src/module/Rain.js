@@ -1,6 +1,6 @@
 //1시간강수량
 
-import { WiRaindrops } from "react-icons/wi";
+// import { WiRaindrops } from "react-icons/wi";
 
 const RainItem = ({ data }) => {
   const array = data.filter((n) => n.category === "RN1");
@@ -9,8 +9,7 @@ const RainItem = ({ data }) => {
   return (
     <div>
       <div>
-        <WiRaindrops />
-       {obsrValue}mm
+        강수량 {obsrValue}mm
       </div>
     </div>
   );
