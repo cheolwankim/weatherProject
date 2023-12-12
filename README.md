@@ -1,7 +1,7 @@
 # 오늘의 날씨
 >
 <br><br>
-![image](https://github.com/cheolwankim/weatherProject/assets/105213482/ce7305ea-a696-4421-b3b3-9e9df6e3d4cb)
+![image](https://github.com/cheolwankim/weatherProject/assets/105213482/aae936da-b2b9-4393-afa0-101f835c1837)
 
 
 ## 🛠 Using Skill
